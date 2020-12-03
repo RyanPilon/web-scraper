@@ -8,10 +8,19 @@ page = requests.get(URL)
 
 soup = BeautifulSoup(page.content, 'html.parser')
 
-results = soup.find_all('span', string= re.compile("citation needed"))
 
-results_string = "\n".join([str(tag) for tag in results])
 
-get_citations_needed_count = print(len(results))
+def get_citations_needed_count(URL):
+    
+    results = soup.find_all('span', string= re.compile("citation needed"))
+    return len(results)
 
-get_citations_needed_report = print(results_string)
+
+def get_citations_needed_report(URL):
+
+    results = soup.find_all('span', string= re.compile("citation needed"))
+    results_string = "\n".join([str(tag) for tag in results])
+    return results_string
+
+print(get_citations_needed_report(URL))
+print(get_citations_needed_count(URL))
